@@ -19,7 +19,7 @@ und Mindestwarenwert setzen und erneut bereitstellen.
 
 ## Teststatus
 
-Entwicklungsstand 0.1.1, bereitgestellt im isolierten Test-Set 441. Keine Freigabe für den Livebetrieb.
+Entwicklungsstand 0.1.3, bereitgestellt im isolierten Test-Set 441. Keine Freigabe für den Livebetrieb.
 Ein realer Testauftrag und die Prüfung der gespeicherten 0-Euro-Position stehen aus.
 Der Auftragseingriff ist auf den regulären `/place-order`-Checkout beschränkt.
 Express-Checkout-Flows ohne diese Route sind noch nicht unterstützt.
@@ -37,3 +37,19 @@ konkurrierende Bestellungen erfordern zusätzlich den nativen Bestandstest.
 - Kein Auftrag abgesendet. Native Auftragserstellung, persistierter Nullpreis,
   Lagerzuordnung und verschiedene Zahlungsabläufe müssen noch end-to-end geprüft werden.
 - Live-Set 439 nicht verändert; alter Test 440 und verworfener Entwicklungsbranch entfernt.
+
+## Produktbild (0.1.2)
+
+Das Checkout-Angebot zeigt ein kleines Bild der konfigurierten Variante; fehlt
+ein Variantenbild, wird das erste allgemeine Artikelbild verwendet. Fehlende
+oder nicht ladbare Bilder werden ausgeblendet. Variantenbild und Auswahl wurden
+in der Vorschau von Set 441 geprüft. 32 automatisierte Prüfungen bestanden.
+Die tatsächliche Testbestellung ist noch nicht abgesendet.
+
+## Shopsprachen (0.1.3)
+
+Unter „In diesen Shopsprachen anzeigen“ können Deutsch, Englisch, Französisch,
+Italienisch, Spanisch und Niederländisch einzeln angehakt werden. Standard: nur
+Deutsch. Keine Auswahl bedeutet: kein Geschenk. Maßgeblich ist die Shopsprache,
+nicht das Lieferland. Die Sprache wird serverseitig beim Angebot, beim Opt-in und
+vor der Auftragserstellung geprüft. Ein Sprachwechsel verwirft die alte Auswahl.
