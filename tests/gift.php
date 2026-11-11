@@ -10,7 +10,7 @@ $services['Plenty\\Modules\\Basket\\Contracts\\BasketRepositoryContract']=new cl
 $services['Plenty\\Modules\\Basket\\Contracts\\BasketItemRepositoryContract']=new class {function all(){global $rows;return $rows;} };
 $services['Plenty\\Modules\\Webshop\\Contracts\\SessionStorageRepositoryContract']=new class {function getSessionValue($k){global $choice;return $choice;}function setSessionValue($k,$v){global $choice;$choice=$v;} };
 $services['Plenty\\Plugin\\Http\\Request']=new class {function getRequestUri(){global $uri;return $uri;} };
-$services['IO\\Services\\ItemService']=new class {function getVariation($id){return ['documents'=>[['data'=>['variation'=>['id'=>$id,'vatId'=>1]]]]];}function getVariationIsSalable($id){global $salable;return $salable;} };
+$services['IO\\Services\\ItemService']=new class {function getVariation($id){global $salable;return ['documents'=>[['data'=>['variation'=>['id'=>$id,'vatId'=>1],'filter'=>['isSalable'=>$salable]]]]];}function getVariationIsSalable($id){global $salable;return $salable;} };
 $services['IO\\Extensions\\Filters\\ItemNameFilter']=new class {function itemName($v){return 'Testgeschenk';} };
 require '/project/src/Services/GiftService.php';
 $s=new \WaldorfshopCheckoutGeschenk\Services\GiftService;
