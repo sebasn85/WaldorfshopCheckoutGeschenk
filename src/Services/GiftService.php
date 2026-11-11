@@ -24,7 +24,7 @@ class GiftService implements OrderInjectionOnCreateContract
         $service=pluginApp(ItemService::class);
         $result=$service->getVariation($id);
         $data=$result['documents'][0]['data'] ?? [];
-        if ((int)($data['variation']['id'] ?? 0)!==$id || !$service->getVariationIsSalable($id)) return [];
+        if ((int)($data['variation']['id'] ?? 0)!==$id || empty($data['filter']['isSalable'])) return [];
         return $data;
     }
     public function state(): array {
