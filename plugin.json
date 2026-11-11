@@ -1,0 +1,29 @@
+{
+  "name": "WaldorfshopCheckoutGeschenk",
+  "namespace": "WaldorfshopCheckoutGeschenk",
+  "type": "general",
+  "version": "0.1.0",
+  "license": "AGPL-3.0",
+  "isClosedSource": false,
+  "description": "Optionales Gratisgeschenk ausschließlich im Checkout.",
+  "author": "Universnatur GmbH",
+  "require": {
+    "Ceres": "5.0.86",
+    "IO": "5.0.86"
+  },
+  "serviceProvider": "WaldorfshopCheckoutGeschenk\\Providers\\GiftProvider",
+  "dataProviders": [
+    {
+      "key": "WaldorfshopCheckoutGeschenk\\Providers\\WidgetProvider",
+      "name": "Checkout-Geschenk: Auswahl",
+      "description": "Freiwillige Auswahl vor der Bestellsumme.",
+      "defaultLayoutContainer": "Ceres::Checkout.BeforeBasketTotals"
+    },
+    {
+      "key": "WaldorfshopCheckoutGeschenk\\Providers\\GiftProvider",
+      "name": "Checkout-Geschenk: Skript",
+      "description": "Speichert die Auswahl in der aktuellen Sitzung.",
+      "defaultLayoutContainer": "Ceres::Checkout.AfterScriptsLoaded"
+    }
+  ]
+}
