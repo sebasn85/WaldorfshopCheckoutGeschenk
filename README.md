@@ -19,9 +19,21 @@ und Mindestwarenwert setzen und erneut bereitstellen.
 
 ## Teststatus
 
-Entwicklungsstand 0.1.0. Keine Freigabe für den Livebetrieb.
+Entwicklungsstand 0.1.1, bereitgestellt im isolierten Test-Set 441. Keine Freigabe für den Livebetrieb.
 Ein realer Testauftrag und die Prüfung der gespeicherten 0-Euro-Position stehen aus.
 Der Auftragseingriff ist auf den regulären `/place-order`-Checkout beschränkt.
 Express-Checkout-Flows ohne diese Route sind noch nicht unterstützt.
 Bestandsverfügbarkeit wird beim Angebot und vor Auftragserstellung geprüft;
 konkurrierende Bestellungen erfordern zusätzlich den nativen Bestandstest.
+
+## Prüfung am 11.11.2026
+
+- 27 automatisierte Logikprüfungen bestanden; PHP und JavaScript syntaktisch geprüft.
+- Vorschau mit Version 0.1.1: Angebot nur im Checkout, standardmäßig abgewählt.
+- Opt-in gespeichert und nach Neuladen erhalten; Opt-out erfolgreich.
+- Bei 47 EUR Warenwert ausgeblendet; bei 94 EUR wieder sichtbar und abgewählt.
+- Keine Zugabe im Warenkorb; Gesamtsumme nach Auswahl unverändert.
+- Ursprüngliche vier Artikel und 99,49 EUR Gesamtsumme wiederhergestellt.
+- Kein Auftrag abgesendet. Native Auftragserstellung, persistierter Nullpreis,
+  Lagerzuordnung und verschiedene Zahlungsabläufe müssen noch end-to-end geprüft werden.
+- Live-Set 439 nicht verändert; alter Test 440 und verworfener Entwicklungsbranch entfernt.
