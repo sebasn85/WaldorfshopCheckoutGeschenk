@@ -29,6 +29,59 @@
           }
         }
       }
+    },
+    "Shopsprachen": {
+      "label": "In diesen Shopsprachen anzeigen (keine Auswahl = kein Geschenk)",
+      "formFields": {
+        "gift.language_de": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Deutsch",
+          "options": {
+            "defaultValue": "true"
+          }
+        },
+        "gift.language_en": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Englisch",
+          "options": {
+            "defaultValue": "false"
+          }
+        },
+        "gift.language_fr": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Französisch",
+          "options": {
+            "defaultValue": "false"
+          }
+        },
+        "gift.language_it": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Italienisch",
+          "options": {
+            "defaultValue": "false"
+          }
+        },
+        "gift.language_es": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Spanisch",
+          "options": {
+            "defaultValue": "false"
+          }
+        },
+        "gift.language_nl": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Niederländisch",
+          "options": {
+            "defaultValue": "false"
+          }
+        }
+      }
     }
   }
 }
