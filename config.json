@@ -1,0 +1,34 @@
+{
+  "formatVersion": 1,
+  "menu": {
+    "Checkout-Geschenk": {
+      "label": "Checkout-Geschenk",
+      "formFields": {
+        "gift.enabled": {
+          "type": "checkBox",
+          "required": false,
+          "label": "Checkout-Geschenk aktivieren",
+          "options": {
+            "defaultValue": "false"
+          }
+        },
+        "gift.threshold": {
+          "type": "text",
+          "required": true,
+          "label": "Mindestwarenwert EUR brutto, nach Rabatt, ohne Versand",
+          "options": {
+            "defaultValue": "59"
+          }
+        },
+        "gift.variationId": {
+          "type": "text",
+          "required": true,
+          "label": "Varianten-ID des Geschenks",
+          "options": {
+            "defaultValue": "0"
+          }
+        }
+      }
+    }
+  }
+}
