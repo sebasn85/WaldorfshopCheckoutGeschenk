@@ -2,7 +2,7 @@
   "name": "WaldorfshopCheckoutGeschenk",
   "namespace": "WaldorfshopCheckoutGeschenk",
   "type": "general",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "AGPL-3.0",
   "isClosedSource": false,
   "description": "Optionales Gratisgeschenk ausschließlich im Checkout.",
