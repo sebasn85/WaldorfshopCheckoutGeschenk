@@ -27,6 +27,19 @@ class GiftService implements OrderInjectionOnCreateContract
         if ((int)($data['variation']['id'] ?? 0)!==$id || empty($data['filter']['isSalable'])) return [];
         return $data;
     }
+    private function image(array $variation): string {
+        $images=$variation['images']['variation'] ?? [];
+        if (!$images) $images=$variation['images']['all'] ?? [];
+        $url=''; $position=PHP_INT_MAX;
+        foreach ($images as $image) {
+            $candidate=$image['urlPreview'] ?? $image['urlMiddle'] ?? $image['url'] ?? '';
+            $rank=(int)($image['position'] ?? 0);
+            if (is_string($candidate) && preg_match('~^https://~',$candidate) && $rank<$position) {
+                $url=$candidate; $position=$rank;
+            }
+        }
+        return $url;
+    }
     public function state(): array {
         $basket=$this->basket();
         $id=(int)$this->setting('variationId','0');
@@ -38,7 +51,7 @@ class GiftService implements OrderInjectionOnCreateContract
         $choice=$this->session()->getSessionValue(self::KEY);
         $selected=$eligible && is_array($choice) && ($choice['selected'] ?? false)===true && (int)($choice['basketId'] ?? 0)===(int)$basket->id && (int)($choice['variationId'] ?? 0)===$id && (int)($choice['threshold'] ?? 0)===$threshold;
         if (!$selected && is_array($choice)) $this->session()->setSessionValue(self::KEY,null);
-        return ['enabled'=>$this->enabled(),'eligible'=>(bool)$eligible,'selected'=>(bool)$selected,'basketId'=>$basket ? (int)$basket->id : 0,'variationId'=>$id,'threshold'=>$threshold/100,'qualifyingValue'=>$value/100,'name'=>$variation ? pluginApp(ItemNameFilter::class)->itemName($variation) : '', 'price'=>0,'quantity'=>1];
+        return ['enabled'=>$this->enabled(),'eligible'=>(bool)$eligible,'selected'=>(bool)$selected,'basketId'=>$basket ? (int)$basket->id : 0,'variationId'=>$id,'threshold'=>$threshold/100,'qualifyingValue'=>$value/100,'name'=>$variation ? pluginApp(ItemNameFilter::class)->itemName($variation) : '', 'image'=>$this->image($variation),'price'=>0,'quantity'=>1];
     }
     public function select(bool $selected,int $basketId): array {
         $state=$this->state();
