@@ -69,7 +69,7 @@ class GiftService implements OrderInjectionOnCreateContract
         $this->session()->setSessionValue(self::KEY,$selected ? ['selected'=>true,'language'=>$state['language'],'basketId'=>$basketId,'variationId'=>$state['variationId'],'threshold'=>$this->cents($state['threshold'])] : null);
         return $this->state();
     }
-    private function itemMap(array $items,string $key): array {
+    private function itemMap(iterable $items,string $key): array {
         $map=[];
         foreach ($items as $item) {
             $row=is_array($item) ? $item : $item->toArray();
@@ -88,7 +88,8 @@ class GiftService implements OrderInjectionOnCreateContract
         $basketItems=pluginApp(BasketItemRepositoryContract::class)->all();
         $orderItems=$data['orderItems'] ?? [];
         // Never add to unrelated orders generated within the same request.
-        if (!$basketItems || $this->itemMap($basketItems,'variationId')!==$this->itemMap($orderItems,'itemVariationId')) return $data;
+        $basketMap = $this->itemMap($basketItems, 'variationId');
+        if (!$basketMap || $basketMap !== $this->itemMap($orderItems, 'itemVariationId')) return $data;
         $variation=$this->variation();
         if (!$variation) throw new \RuntimeException('Das gewählte Geschenk ist nicht mehr verfügbar. Bitte prüfe die Auswahl in der Kasse.');
         $data['orderItems'][]=[
