@@ -25,6 +25,14 @@ $images['all']=[['urlPreview'=>'javascript:alert(1)','position'=>0]];check($s->s
 check(!$s->state()['selected'],'default unchecked');check($s->state()['eligible'],'59 qualifies');
 check($s->handle($order)===$order,'no unsolicited gift');
 $s->select(true,7);$result=$s->handle($order);check(count($result['orderItems'])===2,'one gift');check($result['orderItems'][1]['amounts'][0]['priceOriginalGross']===0.0,'gross zero');check($result['orderItems'][1]['amounts'][0]['priceOriginalNet']===0.0,'net zero');check($result['orderItems'][1]['quantity']===1,'quantity one');check($result['orderItems'][0]===$order['orderItems'][0],'paid items untouched');check($s->handle($result)===$result,'idempotent');check(count($rows)===1,'no basket mutation');
+$arrayRows = $rows;
+$rows = new \ArrayObject([new class {
+    public function toArray(): array { return ['variationId'=>123, 'quantity'=>2]; }
+}]);
+check($s->handle($order) === $result, 'iterable of basket models matches array input');
+$rows = new \ArrayObject();
+check($s->handle($order) === $order, 'empty collection leaves order untouched');
+$rows = $arrayRows;
 $s->select(false,7);check($s->handle($order)===$order,'deselection');
 $basket->itemSum=58.99;check(!$s->state()['eligible'],'58.99 fails');
 $basket->itemSum=60;$basket->couponDiscount=2;check(!$s->state()['eligible'],'coupon excluded');$basket->couponDiscount=0;
